@@ -8,6 +8,7 @@ if ((which cinst) -eq $null) {
 
 cinst curl
 cinst git.install
+cinst msysgit
 cinst poshgit
 cinst putty
 cinst wget
