@@ -8,8 +8,6 @@ if ((which cinst) -eq $null) {
 
 cinst curl
 cinst git.install
-cinst msysgit
-cinst poshgit
 cinst putty
 cinst wget
 cinst wput
@@ -27,6 +25,7 @@ cinst sublimetext3
 
 # Applications 
 
+cinst githubforwindows
 cinst googlechrome
 cinst fiddler
 cinst firefox
