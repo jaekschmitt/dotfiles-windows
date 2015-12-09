@@ -1,26 +1,29 @@
-# # Configure Git
-if (Test-Path (Join-Path $env:LOCALAPPDATA "GitHub")) {
-    Push-Location (Join-Path $env:LOCALAPPDATA "GitHub")
-    . ".\shell.ps1"
-    Push-Location $env:github_posh_git
-    Import-Module .\posh-git
-    Pop-Location
+# Configure Git
 
-    function global:prompt {
-        $realLASTEXITCODE = $LASTEXITCODE
+if($env:LOCALAPPDATA) {
+    if (Test-Path (Join-Path $env:LOCALAPPDATA "GitHub")) {
+        Push-Location (Join-Path $env:LOCALAPPDATA "GitHub")
+        . ".\shell.ps1"
+        Push-Location $env:github_posh_git
+        Import-Module .\posh-git
+        Pop-Location
 
-        # Reset color, which can be messed up by Enable-GitColors
-        $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
+        function global:prompt {
+            $realLASTEXITCODE = $LASTEXITCODE
 
-        Write-Host($pwd.ProviderPath) -nonewline
+            # Reset color, which can be messed up by Enable-GitColors
+            $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
 
-        Write-VcsStatus
+            Write-Host($pwd.ProviderPath) -nonewline
 
-        $global:LASTEXITCODE = $realLASTEXITCODE
-        return "> "
+            Write-VcsStatus
+
+            $global:LASTEXITCODE = $realLASTEXITCODE
+            return "> "
+        }
+
+        Enable-GitColors
+        Start-SshAgent -Quiet
+        Pop-Location
     }
-
-    Enable-GitColors
-    Start-SshAgent -Quiet
-    Pop-Location
 }
