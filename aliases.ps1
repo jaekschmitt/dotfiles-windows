@@ -39,3 +39,6 @@ Set-Alias emptytrash Empty-RecycleBin
 
 # Reload The Shell
 Set-Alias reload Reload-Powershell
+
+# Editors 
+Set-Alias subl "C:\Program Files\Sublime Text 3\sublime_text.exe"
